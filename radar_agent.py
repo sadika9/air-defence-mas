@@ -16,7 +16,7 @@ class ScanBehaviour(CyclicBehaviour):
         self.at_y = None
 
     async def on_start(self):
-        print("{} start scanning...".format(self.name))
+        print("[RADAR] ({}) start scanning...".format(self.name))
         self.counter = 0
 
     async def run(self):
@@ -41,13 +41,13 @@ class ScanBehaviour(CyclicBehaviour):
                                                     str(self.at_y))  # Set the message content
 
             await self.send(msg)
-            print("Radar {} sent message to HQ".format(self.name))
+            print("[RADAR] ({}) sent message to HQ".format(self.name))
 
         await asyncio.sleep(1)
 
 
 class RadarAgent(StationaryAgent):
     async def setup(self):
-        print("RadarAgent {} starting...".format(self.aid))
+        print("[RADAR] ({}) starting...".format(self.aid))
         b = ScanBehaviour(self.aid)
         self.add_behaviour(b)

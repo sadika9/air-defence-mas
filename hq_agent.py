@@ -14,7 +14,7 @@ class RecvBehav(CyclicBehaviour):
     async def run(self):
         msg = await self.receive(timeout=1)  # wait for a message for 10 seconds
         if msg:
-            print("HQ received message with content: {}".format(msg.body))
+            print("[HQ] received message with content: {}".format(msg.body))
             payload = msg.body.split('|')
             x = int(payload[3])
             y = int(payload[4])
@@ -27,7 +27,7 @@ class RecvBehav(CyclicBehaviour):
                     missile_msg.body = msg.body  # Set the message content
 
                     await self.send(missile_msg)
-                    print("HQ forwarded message '{}' to {}".format(msg.body, agent))
+                    print("[HQ] forwarded message '{}' to [{}]".format(msg.body, agent))
 
 
 class HqAgent(StationaryAgent):
@@ -37,7 +37,7 @@ class HqAgent(StationaryAgent):
         self.locations = locations
 
     async def setup(self):
-        print("HqAgent {} starting...".format(self.aid))
+        print("[HQ] {} starting...".format(self.aid))
 
         b = RecvBehav(self.locations)
         template = Template()
