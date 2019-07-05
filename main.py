@@ -16,8 +16,21 @@ geo = {
 
 if __name__ == "__main__":
     hq = HqAgent('hq', geo)
-    hq.start()
+    hq_future = hq.start()
     util.start_web(hq)
+
+    m1 = MissileAgent('missile1')
+    m1_future = m1.start()
+    util.start_web(m1)
+
+    m2 = MissileAgent('missile2')
+    m2_future = m2.start()
+    util.start_web(m2)
+
+    # Wait for hq & missiles to be prepared
+    hq_future.result()
+    m1_future.result()
+    m2_future.result()
 
     r1 = RadarAgent('radar1')
     r1.start()
@@ -26,14 +39,6 @@ if __name__ == "__main__":
     r2 = RadarAgent('radar2')
     r2.start()
     util.start_web(r2)
-
-    m1 = MissileAgent('missile1')
-    m1.start()
-    util.start_web(m1)
-
-    m2 = MissileAgent('missile2')
-    m2.start()
-    util.start_web(m2)
 
     print("Wait until user interrupts with ctrl+C")
     while True:
