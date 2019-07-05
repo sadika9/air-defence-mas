@@ -1,0 +1,53 @@
+import asyncio
+from spade.behaviour import CyclicBehaviour
+from spade.message import Message
+from stationary_agent import StationaryAgent
+
+
+class ScanBehaviour(CyclicBehaviour):
+    def __init__(self, name):
+        super().__init__()
+        self.name = name
+        self.detected = False
+        self.object = None
+        self.object_id = None
+        self.type = None
+        self.at_x = None
+        self.at_y = None
+
+    async def on_start(self):
+        print("{} start scanning...".format(self.name))
+        self.counter = 0
+
+    async def run(self):
+        # print("{} scanning at: {}".format(self.name, self.counter))
+        self.counter += 1
+
+        if self.counter == 2 or self.counter == 10:
+            print('counter is two')
+            self.detected = True
+            self.object = 'plane'
+            self.object_id = 1
+            self.type = 'enemy'
+            self.at_x = 5
+            self.at_y = 5
+        else:
+            self.detected = False
+
+        if self.detected:
+            msg = Message(to="hq@xmpp.test")     # Instantiate the message
+            msg.set_metadata("performative", "inform")  # Set the "inform" FIPA performative
+            msg.body = '{0}|{1}|{2}|{3}|{4}'.format(self.object, str(self.object_id), self.type, str(self.at_x),
+                                                    str(self.at_y))  # Set the message content
+
+            await self.send(msg)
+            print("Radar {} sent message to HQ".format(self.name))
+
+        await asyncio.sleep(1)
+
+
+class RadarAgent(StationaryAgent):
+    async def setup(self):
+        print("RadarAgent {} starting...".format(self.aid))
+        b = ScanBehaviour(self.aid)
+        self.add_behaviour(b)
