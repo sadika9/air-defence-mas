@@ -1,7 +1,4 @@
 import time
-import asyncio
-from spade.agent import Agent
-from spade.behaviour import CyclicBehaviour
 from hq_agent import HqAgent
 from radar_agent import RadarAgent
 from missile_agent import MissileAgent
