@@ -46,5 +46,8 @@ if __name__ == "__main__":
             time.sleep(1)
         except KeyboardInterrupt:
             break
-    # r1.stop()
-    # m1.stop()
+    hq.stop()
+    m1.stop()
+    m2.stop()
+    r1.stop()
+    r2.stop()
