@@ -14,7 +14,28 @@ geo = {
 }
 
 
+class Timeline:
+    def __init__(self):
+        self.data = [
+            {'id': 1, 'object': 'plane', 'type': 'enemy', 'x': -20, 'y': -20},
+            {'id': 2, 'object': 'missile', 'type': 'enemy', 'x': -20, 'y': -20},
+            {'id': 3, 'object': 'plane', 'type': 'enemy', 'x': 40, 'y': 40},
+        ]
+        self.time = 0
+
+    def next(self):
+        if len(self.data) == self.time:
+            return False
+
+        instance = self.data[self.time]
+        self.time += 1
+
+        return instance
+
+
 if __name__ == "__main__":
+    timeline = Timeline()
+
     hq = HqAgent('hq', geo)
     hq_future = hq.start()
     util.start_web(hq)
@@ -32,11 +53,11 @@ if __name__ == "__main__":
     m1_future.result()
     m2_future.result()
 
-    r1 = RadarAgent('radar1')
+    r1 = RadarAgent('radar1', timeline)
     r1.start()
     util.start_web(r1)
 
-    r2 = RadarAgent('radar2')
+    r2 = RadarAgent('radar2', timeline)
     r2.start()
     util.start_web(r2)
 

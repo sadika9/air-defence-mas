@@ -6,9 +6,11 @@ import util
 
 
 class ScanBehaviour(CyclicBehaviour):
-    def __init__(self, name):
+    def __init__(self, name, timeline):
         super().__init__()
         self.name = name
+        self.timeline = timeline
+
         self.detected = False
         self.object = None
         self.object_id = None
@@ -18,20 +20,23 @@ class ScanBehaviour(CyclicBehaviour):
 
     async def on_start(self):
         print("[RADAR] ({}) start scanning...".format(self.name))
-        self.counter = 0
+        # self.counter = 0
 
     async def run(self):
-        # print("{} scanning at: {}".format(self.name, self.counter))
-        self.counter += 1
+        data = self.timeline.next()
+        if not data:
+            return
 
-        if self.counter == 2 or self.counter == 10:
-            print('counter is two')
+        # print("{} scanning at: {}".format(self.name, self.counter))
+        # self.counter += 1
+
+        if data['type'] == 'enemy':
             self.detected = True
-            self.object = 'plane'
-            self.object_id = 1
-            self.type = 'enemy'
-            self.at_x = 5
-            self.at_y = 5
+            self.object = data['object']
+            self.object_id = data['id']
+            self.type = data['type']
+            self.at_x = data['x']
+            self.at_y = data['y']
         else:
             self.detected = False
 
@@ -56,7 +61,13 @@ class ScanBehaviour(CyclicBehaviour):
 
 
 class RadarAgent(StationaryAgent):
+
+    def __init__(self, aid, timeline):
+        super().__init__(aid)
+
+        self.timeline = timeline
+
     async def setup(self):
         print("[RADAR] ({}) starting...".format(self.aid))
-        b = ScanBehaviour(self.aid)
+        b = ScanBehaviour(self.aid, self.timeline)
         self.add_behaviour(b)
