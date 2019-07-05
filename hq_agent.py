@@ -1,3 +1,4 @@
+import asyncio
 from stationary_agent import StationaryAgent
 from spade.behaviour import CyclicBehaviour
 from spade.template import Template
@@ -28,6 +29,8 @@ class RecvBehav(CyclicBehaviour):
 
                     await self.send(missile_msg)
                     print("[HQ] forwarded message '{}' to [{}]".format(msg.body, agent))
+
+        await asyncio.sleep(2)
 
 
 class HqAgent(StationaryAgent):
