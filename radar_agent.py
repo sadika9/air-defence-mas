@@ -21,15 +21,11 @@ class ScanBehaviour(CyclicBehaviour):
 
     async def on_start(self):
         print("[RADAR] ({}) start scanning...".format(self.name))
-        # self.counter = 0
 
     async def run(self):
         data = self.timeline.next()
         if not data:
             return
-
-        # print("{} scanning at: {}".format(self.name, self.counter))
-        # self.counter += 1
 
         if data['type'] == 'enemy':
             self.detected = True
