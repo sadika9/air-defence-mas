@@ -31,7 +31,7 @@ class RecvBehav(CyclicBehaviour):
                     await self.send(missile_msg)
                     print("[HQ] forwarded message '{}' to [{}]".format(msg.body, agent))
 
-        await asyncio.sleep(2)
+        await asyncio.sleep(util.step_delay)
 
 
 class HqAgent(StationaryAgent):

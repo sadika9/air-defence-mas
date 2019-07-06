@@ -1,4 +1,5 @@
 password = 'secret1231'
+step_delay = 2
 
 
 def jid(username):

@@ -2,6 +2,7 @@ import asyncio
 from spade.behaviour import CyclicBehaviour
 from spade.template import Template
 from stationary_agent import StationaryAgent
+import util
 
 
 class RecvBehav(CyclicBehaviour):
@@ -19,7 +20,7 @@ class RecvBehav(CyclicBehaviour):
             if parts[2] == 'enemy':
                 print("[MISSILE] ({}) Firing missile to enemy {} at ({}, {})".format(self.name, parts[0], parts[3], parts[4]))
 
-        await asyncio.sleep(2)
+        await asyncio.sleep(util.step_delay)
 
 
 class MissileAgent(StationaryAgent):

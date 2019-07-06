@@ -54,7 +54,7 @@ class ScanBehaviour(CyclicBehaviour):
                 await self.send_message("hq@xmpp.test")
                 print("[RADAR] ({}) sent message to HQ".format(self.name))
 
-        await asyncio.sleep(2)
+        await asyncio.sleep(util.step_delay)
 
     async def send_message(self, to):
         msg = Message(to=to)  # Instantiate the message
