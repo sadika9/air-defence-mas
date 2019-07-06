@@ -1,5 +1,6 @@
 import asyncio
 import aioxmpp
+import random
 from stationary_agent import StationaryAgent
 from spade.behaviour import CyclicBehaviour
 from spade.template import Template
@@ -14,6 +15,15 @@ class RecvBehav(CyclicBehaviour):
         self.locations = locations
 
     async def run(self):
+        offline_prob = random.randint(0, 100) / 100
+        if offline_prob < 0.2:
+            print("HQ went offline\n")
+            self.presence.set_unavailable()
+        else:
+            if not self.presence.is_available():
+                print("HQ back online\n")
+                self.presence.set_available(show=aioxmpp.PresenceShow.CHAT)
+
         msg = await self.receive(timeout=1)  # wait for a message for 10 seconds
         if msg:
             print("[HQ] received message with content: {}\n".format(msg.body))
