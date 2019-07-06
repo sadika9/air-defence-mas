@@ -41,14 +41,14 @@ class ScanBehaviour(CyclicBehaviour):
             if not self.hq_agent.presence.is_available():
                 await self.send_message('missile1@xmpp.test')
                 await self.send_message('missile2@xmpp.test')
-                print("[RADAR] ({}) HQ not available, directly sent messages to missiles".format(self.name))
+                print("[RADAR] ({}) HQ not available, directly sent messages to missiles\n".format(self.name))
             elif util.circle_contains(0, 0, 10, self.at_x, self.at_y):   # To HQ directly order missile to fire
                 await self.send_message('missile1@xmpp.test')
                 await self.send_message('missile2@xmpp.test')
-                print("[RADAR] ({}) directly sent messages to missiles".format(self.name))
+                print("[RADAR] ({}) directly sent messages to missiles\n".format(self.name))
             else:
                 await self.send_message("hq@xmpp.test")
-                print("[RADAR] ({}) sent message to HQ".format(self.name))
+                print("[RADAR] ({}) sent message to HQ\n".format(self.name))
 
         await asyncio.sleep(util.step_delay)
 

@@ -14,11 +14,11 @@ class RecvBehav(CyclicBehaviour):
     async def run(self):
         msg = await self.receive(timeout=1)  # wait for a message for 10 seconds
         if msg:
-            print("[MISSILE] ({}) received message with content: {}".format(self.name, msg.body))
+            print("[MISSILE] ({}) received message with content: {}\n".format(self.name, msg.body))
             parts = msg.body.split('|')
 
             if parts[2] == 'enemy':
-                print("[MISSILE] ({}) Firing missile to enemy {} at ({}, {})".format(self.name, parts[0], parts[3], parts[4]))
+                print("[MISSILE] ({}) Firing missile to enemy {} at ({}, {})\n".format(self.name, parts[0], parts[3], parts[4]))
 
         await asyncio.sleep(util.step_delay)
 
