@@ -6,10 +6,11 @@ import util
 
 
 class ScanBehaviour(CyclicBehaviour):
-    def __init__(self, name, timeline):
+    def __init__(self, name, timeline, hq_agent):
         super().__init__()
         self.name = name
         self.timeline = timeline
+        self.hq_agent = hq_agent
 
         self.detected = False
         self.object = None
@@ -41,10 +42,14 @@ class ScanBehaviour(CyclicBehaviour):
             self.detected = False
 
         if self.detected:
-            if util.circle_contains(0, 0, 10, self.at_x, self.at_y):   # To HQ directly order missile to fire
+            if not self.hq_agent.presence.is_available():
                 await self.send_message('missile1@xmpp.test')
                 await self.send_message('missile2@xmpp.test')
-                print("[RADAR] ({}) directly sent messages missiles".format(self.name))
+                print("[RADAR] ({}) HQ not available, directly sent messages to missiles".format(self.name))
+            elif util.circle_contains(0, 0, 10, self.at_x, self.at_y):   # To HQ directly order missile to fire
+                await self.send_message('missile1@xmpp.test')
+                await self.send_message('missile2@xmpp.test')
+                print("[RADAR] ({}) directly sent messages to missiles".format(self.name))
             else:
                 await self.send_message("hq@xmpp.test")
                 print("[RADAR] ({}) sent message to HQ".format(self.name))
@@ -62,12 +67,13 @@ class ScanBehaviour(CyclicBehaviour):
 
 class RadarAgent(StationaryAgent):
 
-    def __init__(self, aid, timeline):
+    def __init__(self, aid, timeline, hq_agent):
         super().__init__(aid)
 
         self.timeline = timeline
+        self.hq_agent = hq_agent
 
     async def setup(self):
         print("[RADAR] ({}) starting...".format(self.aid))
-        b = ScanBehaviour(self.aid, self.timeline)
+        b = ScanBehaviour(self.aid, self.timeline, self.hq_agent)
         self.add_behaviour(b)

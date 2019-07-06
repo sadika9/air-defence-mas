@@ -1,4 +1,5 @@
 import asyncio
+import aioxmpp
 from stationary_agent import StationaryAgent
 from spade.behaviour import CyclicBehaviour
 from spade.template import Template
@@ -46,3 +47,5 @@ class HqAgent(StationaryAgent):
         template = Template()
         template.set_metadata("performative", "inform")
         self.add_behaviour(b, template)
+        self.presence.set_available(show=aioxmpp.PresenceShow.CHAT)
+        # self.presence.set_unavailable()

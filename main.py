@@ -70,11 +70,11 @@ if __name__ == "__main__":
     m1_future.result()
     m2_future.result()
 
-    r1 = RadarAgent('radar1', timeline)
+    r1 = RadarAgent('radar1', timeline, hq)
     r1.start()
     util.start_web(r1)
 
-    r2 = RadarAgent('radar2', timeline)
+    r2 = RadarAgent('radar2', timeline, hq)
     r2.start()
     util.start_web(r2)
 
