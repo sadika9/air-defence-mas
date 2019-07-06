@@ -1,4 +1,5 @@
 import time
+import random
 from hq_agent import HqAgent
 from radar_agent import RadarAgent
 from missile_agent import MissileAgent
@@ -9,19 +10,35 @@ geo = {
     'hq': {'x': 0, 'y': 0},
     'radar1': {'x': 25, 'y': 25, 'range': 100},
     'radar2': {'x': -100, 'y': 100, 'range': 100},
-    'missile1': {'x': 50, 'y': 50, 'range': 75},
-    'missile2': {'x': -50, 'y': -50, 'range': 75},
+    'missile1': {'x': 50, 'y': 50, 'range': 300},
+    'missile2': {'x': -50, 'y': -50, 'range': 250},
 }
 
 
 class Timeline:
     def __init__(self):
         self.data = [
-            {'id': 1, 'object': 'plane', 'type': 'enemy', 'x': -20, 'y': -20},
-            {'id': 2, 'object': 'missile', 'type': 'enemy', 'x': -20, 'y': -20},
-            {'id': 3, 'object': 'plane', 'type': 'enemy', 'x': 40, 'y': 40},
+            {'id': 10, 'object': 'plane', 'type': 'enemy', 'x': -20, 'y': -20},
+            {'id': 20, 'object': 'missile', 'type': 'enemy', 'x': -20, 'y': -20},
+            {'id': 33, 'object': 'plane', 'type': 'enemy', 'x': 40, 'y': 40},
+            {'id': 50, 'object': 'missile', 'type': 'enemy', 'x': 0, 'y': 0},
         ]
         self.time = 0
+
+        objects = ['plane', 'bird', 'missile']
+        types = ['enemy', 'friend']
+
+        for i in range(100):
+            obj = random.choice(objects)
+            typ = random.choice(types)
+            if obj == 'bird':
+                typ = 'neutral'
+
+            x = random.randint(0, 500)
+            y = random.randint(0, 500)
+
+            item = {'id': 100 + i, 'object': obj, 'type': typ, 'x': x, 'y': y}
+            self.data.append(item)
 
     def next(self):
         if len(self.data) == self.time:
