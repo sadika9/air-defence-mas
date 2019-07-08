@@ -1,5 +1,17 @@
+import settings
+
 password = 'secret1231'
 step_delay = 2
+
+
+def mas_print_data(msg):
+    if settings.print_data:
+        print('>>>>|' + msg)
+
+
+def mas_print_info(msg):
+    if settings.print_info:
+        print(msg + "\n")
 
 
 def jid(username):
@@ -13,6 +25,8 @@ def start_web(agent):
         port = "10000"
     elif username == 'hq':
         port = "20000"
+    elif username == 'publisher':
+        port = "20001"
     else:
         if username.startswith('missile'):
             n = int(username[7:]) + 200

@@ -4,15 +4,7 @@ from hq_agent import HqAgent
 from radar_agent import RadarAgent
 from missile_agent import MissileAgent
 import util
-
-
-geo = {
-    'hq': {'x': 0, 'y': 0},
-    'radar1': {'x': 25, 'y': 25, 'range': 100},
-    'radar2': {'x': -100, 'y': 100, 'range': 100},
-    'missile1': {'x': 50, 'y': 50, 'range': 300},
-    'missile2': {'x': -50, 'y': -50, 'range': 250},
-}
+import settings
 
 
 class Timeline:
@@ -53,7 +45,7 @@ class Timeline:
 if __name__ == "__main__":
     timeline = Timeline()
 
-    hq = HqAgent('hq', geo)
+    hq = HqAgent('hq', settings.geo)
     hq_future = hq.start()
     util.start_web(hq)
 
@@ -78,7 +70,7 @@ if __name__ == "__main__":
     r2.start()
     util.start_web(r2)
 
-    print("Wait until user interrupts with ctrl+C")
+    util.mas_print_info("Wait until user interrupts with ctrl+C")
     while True:
         try:
             time.sleep(1)

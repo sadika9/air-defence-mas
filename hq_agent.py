@@ -17,16 +17,18 @@ class RecvBehav(CyclicBehaviour):
     async def run(self):
         offline_prob = random.randint(0, 100) / 100
         if offline_prob < 0.2:
-            print("HQ went offline\n")
             self.presence.set_unavailable()
+            util.mas_print_data('state|hq|offline')
+            util.mas_print_info("HQ went offline")
         else:
             if not self.presence.is_available():
-                print("HQ back online\n")
                 self.presence.set_available(show=aioxmpp.PresenceShow.CHAT)
+                util.mas_print_data('state|hq|online')
+                util.mas_print_info("HQ back online")
 
         msg = await self.receive(timeout=1)  # wait for a message for 10 seconds
         if msg:
-            print("[HQ] received message with content: {}\n".format(msg.body))
+            util.mas_print_info("[HQ] received message with content: {}".format(msg.body))
             payload = msg.body.split('|')
             x = int(payload[3])
             y = int(payload[4])
@@ -38,8 +40,9 @@ class RecvBehav(CyclicBehaviour):
                     missile_msg.set_metadata("performative", "inform")  # Set the "inform" FIPA performative
                     missile_msg.body = msg.body  # Set the message content
 
+                    util.mas_print_data('msg|hq|{}|{}'.format(agent, msg.body))
+                    util.mas_print_info("[HQ] forwarded message '{}' to [{}]".format(msg.body, agent))
                     await self.send(missile_msg)
-                    print("[HQ] forwarded message '{}' to [{}]\n".format(msg.body, agent))
 
         await asyncio.sleep(util.step_delay)
 
@@ -51,7 +54,7 @@ class HqAgent(StationaryAgent):
         self.locations = locations
 
     async def setup(self):
-        print("[HQ] {} starting...".format(self.aid))
+        util.mas_print_info("[HQ] {} starting...".format(self.aid))
 
         b = RecvBehav(self.locations)
         template = Template()
