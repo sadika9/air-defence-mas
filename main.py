@@ -10,7 +10,7 @@ import settings
 class Timeline:
     def __init__(self):
         self.data = [
-            {'id': 10, 'object': 'plane', 'type': 'enemy', 'x': 420, 'y': 420},
+            {'id': 10, 'object': 'plane', 'type': 'enemy', 'x': 320, 'y': 320},
             {'id': 20, 'object': 'missile', 'type': 'enemy', 'x': 420, 'y': 420},
             {'id': 33, 'object': 'plane', 'type': 'enemy', 'x': 400, 'y': 400},
             {'id': 50, 'object': 'missile', 'type': 'enemy', 'x': settings.agents['hq']['x'], 'y': settings.agents['hq']['y']},
