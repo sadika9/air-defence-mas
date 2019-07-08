@@ -10,10 +10,10 @@ import settings
 class Timeline:
     def __init__(self):
         self.data = [
-            {'id': 10, 'object': 'plane', 'type': 'enemy', 'x': -20, 'y': -20},
-            {'id': 20, 'object': 'missile', 'type': 'enemy', 'x': -20, 'y': -20},
-            {'id': 33, 'object': 'plane', 'type': 'enemy', 'x': 40, 'y': 40},
-            {'id': 50, 'object': 'missile', 'type': 'enemy', 'x': 0, 'y': 0},
+            {'id': 10, 'object': 'plane', 'type': 'enemy', 'x': 420, 'y': 420},
+            {'id': 20, 'object': 'missile', 'type': 'enemy', 'x': 420, 'y': 420},
+            {'id': 33, 'object': 'plane', 'type': 'enemy', 'x': 400, 'y': 400},
+            {'id': 50, 'object': 'missile', 'type': 'enemy', 'x': settings.agents['hq']['x'], 'y': settings.agents['hq']['y']},
         ]
         self.time = 0
 
@@ -26,8 +26,8 @@ class Timeline:
             if obj == 'bird':
                 typ = 'neutral'
 
-            x = random.randint(0, 500)
-            y = random.randint(0, 500)
+            x = random.randint(10, 840)
+            y = random.randint(10, 540)
 
             item = {'id': 100 + i, 'object': obj, 'type': typ, 'x': x, 'y': y}
             self.data.append(item)

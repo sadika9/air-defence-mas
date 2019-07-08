@@ -7,35 +7,35 @@ agents = {
     'hq': {
         'username': 'hq',
         'password': __password,
-        'x': 0,
-        'y': 0
+        'x': 425,
+        'y': 275,
     },
     'radar1': {
         'username': 'radar1',
         'password': __password,
-        'x': 25,
-        'y': 25,
-        'range': 100
+        'x': 250,
+        'y': 275,
+        'range': 250
     },
     'radar2': {
         'username': 'radar2',
         'password': __password,
-        'x': -100,
-        'y': 100,
-        'range': 100
+        'x': 550,
+        'y': 250,
+        'range': 300
     },
     'missile1': {
         'username': 'missile1',
         'password': __password,
-        'x': 50,
-        'y': 50,
+        'x': 570,
+        'y': 280,
         'range': 300
     },
     'missile2': {
         'username': 'missile2',
         'password': __password,
-        'x': -50,
-        'y': -50,
+        'x': 255,
+        'y': 250,
         'range': 250
     },
 }

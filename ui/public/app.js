@@ -5,7 +5,7 @@ let _flyingItems = [];
 
 function setup() {
     _stage = new createjs.Stage('mas-canvas');
-    _stage.setTransform(425, 275, 1, 1)
+    _stage.setTransform(0, 0, 1, 1)
 }
 
 function init() {
