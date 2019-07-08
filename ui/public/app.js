@@ -115,12 +115,19 @@ function processMsg(payload) {
 
     if (sender.startsWith('radar')) {
         // >>>>|msg|radar2|hq|plane|102|enemy|152|347
-        const item = createEnemyItem(payload[5], payload[4], payload[6], payload[7], payload[8]);
-        _flyingItems.push(item);
+        const itemId = payload[5];
+        const found = _flyingItems.find(function(i) {
+          return i.id === itemId;
+        });
 
-        _stage.addChild(item.g);
+        if (!found) {
+            const item = createEnemyItem(payload[5], payload[4], payload[6], payload[7], payload[8]);
+            _flyingItems.push(item);
 
-        _stage.update();
+            _stage.addChild(item.g);
+
+            _stage.update();
+        }
     }
 }
 
