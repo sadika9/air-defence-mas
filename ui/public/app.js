@@ -192,8 +192,8 @@ function createAgentItem(name, x, y, range) {
 }
 
 function createEnemyItem(id, type, side, x, y) {
-    const fillColor = 'red';
     let labelColor = 'black';
+    let fillColor = (type === 'plane') ? 'orange' : 'red';
 
     const enemy = new createjs.Shape();
     enemy.graphics.beginFill(fillColor).drawPolyStar(0, 0, 20, 3);
