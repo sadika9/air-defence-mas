@@ -238,7 +238,7 @@ function writeMessage(message) {
             }
         } else if (parts[1] === 'fire') {
             //>>>>|fire|missile2|missile|20|enemy|-20|-20
-            text = parts[3] + ' fired a missile to ' + parts[5] + ' ' + parts[3] + ' ' + ' at (' + parts[6] + ', '  + parts[7] + ')';
+            text = parts[2] + ' fired a missile to ' + parts[5] + ' ' + parts[3] + ' ' + ' at (' + parts[6] + ', '  + parts[7] + ')';
         }
     }
 
