@@ -8,13 +8,13 @@
 }
 
 .mas-canvas {
-    border: 1px black solid;
+    border: 1px #ebebeb solid;
     background-color: #1d1d1d;
 }
 
 .message-box {
     width: 500px;
     height: 489px;
-    border: 1px black solid;
+    border: 1px #ebebeb solid;
     overflow: scroll;
 }
