@@ -160,17 +160,17 @@ function createAgentItem(name, x, y, range) {
     if (name === 'hq') {
         type = 'hq';
         range = 0;
-        pointColor = 'rgba(123, 239, 178)';
+        pointColor = 'rgba(247, 202, 24, 1)';
     } else if (name.startsWith('radar')) {
         type = 'radar';
-        rangeColor = 'rgba(51, 110, 123, 0.05)';
-        strokeColor = 'rgba(51, 110, 123)';
-        pointColor = 'rgba(51, 110, 123)';
+        rangeColor = 'rgba(46, 204, 113, 0.05)';
+        strokeColor = 'rgba(46, 204, 113, 1)';
+        pointColor = 'rgba(46, 204, 113, 1)';
     } else if (name.startsWith('missile')) {
         type = 'missile';
-        rangeColor = 'rgba(240, 20, 252, 0.05)';
-        strokeColor = 'rgba(240, 20, 252)';
-        pointColor = 'rgba(240, 20, 252)';
+        rangeColor = 'rgba(242, 38, 19, 0.05)';
+        strokeColor = 'rgba(242, 38, 19, 1)';
+        pointColor = 'rgba(242, 38, 19, 1)';
     }
 
     const rangeCircle = new createjs.Shape();
