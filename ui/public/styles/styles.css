@@ -16,5 +16,5 @@
     width: 500px;
     height: 489px;
     border: 1px #ebebeb solid;
-    overflow: scroll;
+    overflow-y: scroll;
 }
