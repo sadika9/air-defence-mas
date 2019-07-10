@@ -4,19 +4,16 @@
 }
 
 .toolbar {
-    grid-row: 1;
     margin: 1em;
 }
 
 .mas-canvas {
-    grid-row: 2;
     border: 1px black solid;
 }
 
 .message-box {
-    grid-row: 2;
     width: 500px;
-    height: 550px;
+    height: 489px;
     border: 1px black solid;
     overflow: scroll;
 }
