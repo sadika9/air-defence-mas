@@ -151,10 +151,10 @@ function processFire(payload) {
 
 function createAgentItem(name, x, y, range) {
     let rangeColor = 'DeepSkyBlue';
-    let strokeColor = 'black';
+    let strokeColor = 'white';
     const pointSize = 10;
-    let pointColor = 'black';
-    let labelColor = 'black';
+    let pointColor = 'white';
+    let labelColor = 'white';
     let type = null;
 
     if (name === 'hq') {
@@ -192,7 +192,7 @@ function createAgentItem(name, x, y, range) {
 }
 
 function createEnemyItem(id, type, side, x, y) {
-    let labelColor = 'black';
+    let labelColor = 'white';
     let fillColor = (type === 'plane') ? 'orange' : 'red';
 
     const enemy = new createjs.Shape();

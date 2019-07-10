@@ -9,6 +9,7 @@
 
 .mas-canvas {
     border: 1px black solid;
+    background-color: #1d1d1d;
 }
 
 .message-box {
